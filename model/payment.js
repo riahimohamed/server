@@ -1,18 +1,15 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.model(
-	"Stock",
+	"Person",
 	new mongoose.Schema({
-		quantity: Number ,
-		comment: {type: String, default: null},
-		product_id: { 
+		type: String,
+		card_number: Number,
+		expiration: Date,
+		validation_code: Number,
+		user_id: [{ 
 			type: mongoose.Schema.Types.ObjectId,
-			ref: ''
-		},
-		createdAt: {
-			type: Date,
-			default: Date.now
-		}
+			ref: "User" }],
 	})
 );
 

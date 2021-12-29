@@ -19,6 +19,10 @@ const productSchema = new mongoose.Schema({
 	price_id: [{ 
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "Price" }],
+
+	person_id: [{ 
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Person" }],
 			
 	createdAt : {
 		type: Date,

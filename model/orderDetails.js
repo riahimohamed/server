@@ -5,10 +5,10 @@ const Schema = mongoose.model(
 	new mongoose.Schema({
 		quantity: Number,
 		price: Number,
-		product_id: [{ 
+		product_id: { 
 					type: mongoose.Schema.Types.ObjectId,
 					ref: 'Product'
-				}]
+				}
 	})
 );
 

@@ -2,6 +2,8 @@ const router = require('express').Router();
 
 const Product = require('../model/products');
 const Category = require('../model/category');
+const Order = require('../model/order');
+const OrderDetails = require('../model/orderDetails');
 
 const multer = require('multer');
 let fileExtension = require('file-extension');
@@ -70,6 +72,30 @@ router.post('/create',upload.single('image'), async (req, res) => {
     // Category.updateMany({ '_id': Product.category_id }, { $push: { product_id: Product._id } });
 		return res.send("Product bien enregistré");
 	});
+});
+
+router.post('/order', (req, res) => {
+  const { user } = request;
+
+  if (user) {
+    const orders = req.body;
+
+    await OrderDetails.create(orders, (err) => {
+      if(err) return res.status(400).send(err);
+
+      Order.updateMany(
+        Order.orderDetails_id,
+        { $push: { orderDetails_id: orderDetails._id } },
+        { new: true, useFindAndModify: false }
+      );
+
+      // Category.updateMany({ '_id': Product.category_id }, { $push: { product_id: Product._id } });
+      return res.send("Product bien enregistré");
+    });
+
+  } else {
+    response.status(403).json({message: "permission refusée"});
+  }
 });
 
 router.route("/update/:id").patch((req, res, next) => {

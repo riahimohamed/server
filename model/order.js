@@ -5,7 +5,6 @@ const Schema = mongoose.model(
 	new mongoose.Schema({
 		delivery_type: String,
 		status: String,
-		amount: Number,
 		user_id: { 
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User'
@@ -13,7 +12,7 @@ const Schema = mongoose.model(
 		orderDetails_id: [{ 
 					type: mongoose.Schema.Types.ObjectId,
 					ref: 'OrderDetails'
-				}]
+				}],
 		createdAt : {
 			type: Date,
 			default: Date.now,

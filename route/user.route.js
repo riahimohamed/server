@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 
 const User = require("../model/user");
 
+
 const auth = require("../middleware/auth");
 const permit = require('../middleware/authorization');
 

@@ -3,10 +3,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.model(
 	"Person",
 	new mongoose.Schema({
-		_id: { 
-			type: mongoose.Schema.Types.ObjectId,
-			ref: ''
-		}
+		name: String,
+		actor: Number,
+		realisator: Number
 	})
 );
 
