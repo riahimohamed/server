@@ -16,8 +16,8 @@ require("./route/authenticate/twitter");
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use(require('express-session')(
-	{ secret: 'keyboard cat',
+app.use(session(
+	{ secret: 'secret',
 	  resave: false, 
 	  saveUninitialized: false }));
 
@@ -28,7 +28,9 @@ const users = require('./route/user.route');
 app.use('/users', users);
 
 const products = require('./route/products.route');
+const cart = require('./route/cart.route');
 app.use('/products', products);
+app.use('/cart', cart);
 
 const category = require('./route/category.route');
 app.use('/category', category);

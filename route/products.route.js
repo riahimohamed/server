@@ -42,8 +42,8 @@ router.post('/upload', upload.single('image'), function (req, res) {
 router.get('/', (req, res) => {
   Product.find()
     .populate("category_id")
-    .exec((err, promo) => {
-      if (!err) return res.send(promo);
+    .exec((err, data) => {
+      if (!err) return res.json(data);
           else res.status(400).send(err);
     });
 });
@@ -74,29 +74,6 @@ router.post('/create',upload.single('image'), async (req, res) => {
 	});
 });
 
-router.post('/order', (req, res) => {
-  const { user } = request;
-
-  if (user) {
-    const orders = req.body;
-
-    await OrderDetails.create(orders, (err) => {
-      if(err) return res.status(400).send(err);
-
-      Order.updateMany(
-        Order.orderDetails_id,
-        { $push: { orderDetails_id: orderDetails._id } },
-        { new: true, useFindAndModify: false }
-      );
-
-      // Category.updateMany({ '_id': Product.category_id }, { $push: { product_id: Product._id } });
-      return res.send("Product bien enregistré");
-    });
-
-  } else {
-    response.status(403).json({message: "permission refusée"});
-  }
-});
 
 router.route("/update/:id").patch((req, res, next) => {
   Product.findByIdAndUpdate(
